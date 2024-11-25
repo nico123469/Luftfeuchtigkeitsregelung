@@ -94,7 +94,7 @@ input_number:
 ```
 ### 3. Blueprint konfigurieren
   - Wähle beim Hinzufügen der Automatisierung die passenden Entitäten für deine Sensoren und Schalter aus.
-
+---
 ## Anpassung
   - ### Zeitintervall
     - Ändere den Wert im time_pattern-Trigger, um die Überprüfungshäufigkeit anzupassen:
