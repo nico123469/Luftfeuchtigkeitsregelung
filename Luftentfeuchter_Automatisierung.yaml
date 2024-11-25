@@ -1,0 +1,119 @@
+blueprint:
+  name: Luftentfeuchter Automatisierung
+  description: Automatisierung zur Steuerung eines Luftentfeuchters basierend auf Innen- und Außentemperatur sowie Luftfeuchtigkeit.
+  domain: automation
+  input:
+    indoor_humidity_sensors:
+      name: Innen Luftfeuchtigkeitssensoren
+      description: Wähle eine oder mehrere Sensoren für die Innen-Luftfeuchtigkeit.
+      selector:
+        entity:
+          domain: sensor
+          multiple: true
+    indoor_temperature_sensors:
+      name: Innen Temperatursensoren
+      description: Wähle die zu den Luftfeuchtigkeitssensoren passenden Temperatur Sensoren.
+      selector:
+        entity:
+          domain: sensor
+          multiple: true
+    outdoor_humidity_sensor:
+      name: Außen Luftfeuchtigkeitssensor
+      description: Wähle den Sensor für die Außen-Luftfeuchtigkeit.
+      selector:
+        entity:
+          domain: sensor
+    outdoor_temperature_sensor:
+      name: Außen Temperatursensor
+      description: Wähle den Sensor für die Außen-Temperatur.
+      selector:
+        entity:
+          domain: sensor
+#    manual_override_boolean:
+#      name: Manueller Kaltes Wetter Override
+#      description: Input Boolean, um manuell "Kaltes Wetter" zu erzwingen.
+#      selector:
+#        entity:
+#          domain: input_boolean
+    dehumidifier_switch:
+      name: Schalter für Luftentfeuchter
+      description: Schalter zum Ein-/Ausschalten des Luftentfeuchters.
+      selector:
+        entity:
+          domain: switch
+
+variables:
+  indoor_humidity_entities: !input indoor_humidity_sensors
+  indoor_temperature_entities: !input indoor_temperature_sensors
+  outdoor_humidity_entity: !input outdoor_humidity_sensor
+  outdoor_temperature_entity: !input outdoor_temperature_sensor
+  #manual_override_entity: !input manual_override_boolean
+  dehumidifier_entity: !input dehumidifier_switch
+
+  # Nutzung der input_number Entitäten für die Luftfeuchtigkeitsgrenzen
+  max_humidity_warm: "{{ states('input_number.max_humidity_warm') | float }}"
+  min_humidity_warm: "{{ states('input_number.min_humidity_warm') | float }}"
+  max_humidity_cold: "{{ states('input_number.max_humidity_cold') | float }}"
+  min_humidity_cold: "{{ states('input_number.min_humidity_cold') | float }}"
+  
+  #    manual_override_boolean:
+  manual_override_entity: "{{ state('input_boolean.manual_cold_weather_override') | boolean }}"
+
+
+trigger:
+  - platform: time_pattern
+    # Dieser Trigger wird alle 5 Minuten ausgeführt
+    minutes: "/5"
+
+action:
+  - variables:
+      taupunkte: >
+        {% set taupunkte = [] %}
+        {% for i in range(indoor_humidity_entities | count) %}
+          {% set humidity = states(indoor_humidity_entities[i]) | float %}
+          {% set temperature = states(indoor_temperature_entities[i]) | float %}
+          {% set taupunkt = (243.12 * (math.log(humidity / 100) + ((17.62 * temperature) / (243.12 + temperature)))) / (17.62 - (math.log(humidity / 100) + ((17.62 * temperature) / (243.12 + temperature)))) %}
+          {% set taupunkte = taupunkte + [taupunkt] %}
+        {% endfor %}
+        {{ taupunkte }}
+
+      mittlere_luftfeuchtigkeit: >
+        {% set feuchtigkeiten = indoor_humidity_entities | map('states') | map('float') | list %}
+        {{ feuchtigkeiten | sum / feuchtigkeiten | length }}
+
+      mittlere_temperatur: >
+        {% set temperaturen = indoor_temperature_entities | map('states') | map('float') | list %}
+        {{ temperaturen | sum / temperaturen | length }}
+
+      hoechster_taupunkt: "{{ taupunkte | max }}"
+
+      aussen_temperatur: "{{ states(outdoor_temperature_entity) | float }}"
+      ist_kaltes_wetter: >
+        {% if is_state(manual_override_entity, 'on') %}
+          true
+        {% else %}
+          {{ hoechster_taupunkt > aussen_temperatur }}
+        {% endif %}
+
+      max_humidity: >
+        {{ max_humidity_cold if ist_kaltes_wetter else max_humidity_warm }}
+
+      min_humidity: >
+        {{ min_humidity_cold if ist_kaltes_wetter else min_humidity_warm }}
+
+  - choose:
+      - conditions:
+          - condition: template
+            value_template: "{{ mittlere_luftfeuchtigkeit > max_humidity }}"
+        sequence:
+          - service: switch.turn_on
+            target:
+              entity_id: !input dehumidifier_switch
+
+      - conditions:
+          - condition: template
+            value_template: "{{ mittlere_luftfeuchtigkeit < min_humidity }}"
+        sequence:
+          - service: switch.turn_off
+            target:
+              entity_id: !input dehumidifier_switch
