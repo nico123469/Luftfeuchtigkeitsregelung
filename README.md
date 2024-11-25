@@ -91,3 +91,18 @@ input_number:
     max: 100
     step: 1
     unit_of_measurement: '%'
+```
+### 3. Blueprint konfigurieren
+
+- Gehe in die Automatisierungsoberfläche von Home Assistant.
+- Wähle "Blueprint verwenden" und suche das importierte **Luftentfeuchter Automatisierung Blueprint**.
+- Fülle die erforderlichen Felder aus:
+  - Wähle die Sensoren für die Innen-Luftfeuchtigkeit und Innen-Temperatur.
+  - Gib die Sensoren für Außen-Luftfeuchtigkeit und Außen-Temperatur an.
+  - Wähle den Schalter für den Luftentfeuchter.
+- Optional:
+  - Gib die Entität für den manuellen Wetter-Override an (`input_boolean.manual_cold_weather_override`).
+  - Nutze die vordefinierten `input_number`-Entitäten, um die Feuchtigkeitsgrenzen dynamisch anzupassen.
+- Speichere die Automatisierung.
+
+Sobald dies abgeschlossen ist, steuert das Blueprint deinen Luftentfeuchter basierend auf den definierten Bedingungen.
