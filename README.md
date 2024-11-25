@@ -1,3 +1,5 @@
+# !!!WIP!!!
+
 # Luftentfeuchter Automatisierung Blueprint
 
 Dieses Blueprint automatisiert die Steuerung eines Luftentfeuchters basierend auf Innen- und Außentemperatur sowie der relativen Luftfeuchtigkeit. Es ermöglicht eine dynamische Anpassung der Luftfeuchtigkeitsgrenzen über `input_number`-Entitäten und bietet die Möglichkeit, kaltes Wetter manuell zu überschreiben.
