@@ -93,8 +93,7 @@ input_number:
     unit_of_measurement: '%'
 ```
 ### 2. Blueprint konfigurieren
-
-    Wähle beim Hinzufügen der Automatisierung die passenden Entitäten für deine Sensoren und Schalter aus.
+  - Wähle beim Hinzufügen der Automatisierung die passenden Entitäten für deine Sensoren und Schalter aus.
 
 Anpassung
 Zeitintervall
