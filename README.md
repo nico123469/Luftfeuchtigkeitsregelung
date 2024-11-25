@@ -92,7 +92,7 @@ input_number:
     step: 1
     unit_of_measurement: '%'
 ```
-### 2. Blueprint konfigurieren
+### 3. Blueprint konfigurieren
   - Wähle beim Hinzufügen der Automatisierung die passenden Entitäten für deine Sensoren und Schalter aus.
 
 ## Anpassung
