@@ -104,12 +104,3 @@ input_number:
 trigger:
   - platform: time_pattern
     minutes: "/5"  # Alle 5 Minuten
-```
-  - ### Symbole
-
-    - Passe die Icons in den input_number- und input_boolean-Definitionen an, um deine Benutzeroberfläche weiter zu personalisieren. Beispiele für mögliche Icons findest du unter Material Design Icons.
----
-
-## Lizenz
-
-Dieses Blueprint steht unter der MIT-Lizenz. Anpassungen und Verbesserungen sind willkommen!
