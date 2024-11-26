@@ -38,7 +38,7 @@ Dieses Blueprint automatisiert die Steuerung eines Luftentfeuchters basierend au
   - Entfeuchter-Schalter (`switch`)
     zum Beispiel über einen Smartplug
 
-- **Optionale Entitäten**:
+- **Variablen**:
   - `input_boolean.manual_cold_weather_override`: Überschreibt die Erkennung kalter Wetterbedingungen.
   - `input_number.max_humidity_warm`: Maximal zulässige Luftfeuchtigkeit bei warmem Wetter.
   - `input_number.min_humidity_warm`: Minimal zulässige Luftfeuchtigkeit bei warmem Wetter.
@@ -51,7 +51,13 @@ Dieses Blueprint automatisiert die Steuerung eines Luftentfeuchters basierend au
 
 ### 1. Blueprint importieren
 
-Lade die YAML-Datei dieses Blueprints in deinen `blueprints/automation`-Ordner.
+   #### 1. **Klicke auf die folgenden Links**, um die Blueprints direkt zu importieren:
+   - [Template-Sensor für Absolute Luftfeuchtigkeit](https://github.com/nico123469/Luftfeuchtigkeitsregelung/raw/refs/heads/main/Luftentfeuchter_Automatisierung.yaml)
+
+   #### 2. **Importiere den Blueprint in Home Assistant**:
+   - Gehe in Home Assistant zu **Einstellungen** → **Blueprints** → **Blueprint importieren**.
+   - Füge die obenstehenden Links in das **URL-Feld** ein und klicke auf **Importieren**.
+
 
 ### 2. Entitäten konfigurieren
 
