@@ -6,25 +6,23 @@ Dieses Blueprint automatisiert die Steuerung eines Luftentfeuchters basierend au
 
 ---
 
-## Features
+## Funktion der Automatisierung
 
-- **Dynamische Feuchtigkeitsgrenzen**: 
-  - Verwende `input_number`-Entitäten, um die minimalen und maximalen Luftfeuchtigkeitswerte für warme und kalte Wetterbedingungen zu definieren.
-  - Änderungen an den Entitäten wirken sich sofort auf die Automatisierung aus.
+Dieses Blueprint automatisiert die Steuerung eines Luftentfeuchters basierend auf Innen- und Außentemperatur sowie der Luftfeuchtigkeit. Die Hauptfunktionen der Automatisierung sind:
 
-- **Taupunktberechnung**: 
-  - Berechnet die Taupunkte auf Basis der Innen-Luftfeuchtigkeit und -Temperatur.
-  - Erkennt kalte Wetterbedingungen automatisch anhand des höchsten Taupunkts im Vergleich zur Außentemperatur.
+1. **Taupunktberechnung**: Mithilfe der Innenraum-Sensoren für Temperatur und Luftfeuchtigkeit wird der Taupunkt berechnet. Der Taupunkt ist die Temperatur, bei der die Luftfeuchtigkeit kondensieren würde.
 
-- **Manueller Wetter-Override**:
-  - Ein `input_boolean` ermöglicht es, kaltes Wetter manuell zu erzwingen.
+2. **Wetterunterscheidung**: Die Automatisierung unterscheidet zwischen warmem und kaltem Wetter, basierend auf der Außentemperatur im Vergleich zum höchsten Taupunktwert im Innenraum:
+   - **Warmwetter-Modus**: Wenn die Außentemperatur höher als der höchste Innen-Taupunkt ist.
+   - **Kaltwetter-Modus**: Wenn die Außentemperatur niedriger als der höchste Innen-Taupunkt ist (erhöhtes Kondensationsrisiko).
 
-- **Zeitbasierte Steuerung**:
-  - Die Automatisierung wird alle 5 Minuten ausgeführt, um die Bedingungen zu überprüfen und den Luftentfeuchter ein- oder auszuschalten.
+3. **Hysterese-Grenzen**: Für beide Wettermodi (warm/kalt) können jeweils individuelle Ober- und Untergrenzen der Luftfeuchtigkeit festgelegt werden, um den Luftentfeuchter zu steuern:
+   - **Einschalten des Luftentfeuchters**: Wenn die mittlere Luftfeuchtigkeit im Innenraum den festgelegten Maximalwert überschreitet.
+   - **Ausschalten des Luftentfeuchters**: Wenn die mittlere Luftfeuchtigkeit unter den festgelegten Minimalwert fällt.
 
-- **Schaltlogik**:
-  - Aktiviert den Luftentfeuchter, wenn die Luftfeuchtigkeit über den festgelegten Maximalwert steigt.
-  - Deaktiviert den Luftentfeuchter, wenn die Luftfeuchtigkeit unter den festgelegten Minimalwert fällt.
+4. **Regelmäßige Überprüfung**: Die Automatisierung prüft alle fünf Minuten die aktuellen Werte der Sensoren, um gegebenenfalls den Luftentfeuchter ein- oder auszuschalten.
+
+5. **Manuelle Override-Funktion**: Es gibt einen Override-Schalter, der den Kaltwettermodus manuell aktivieren kann, unabhängig von der Außentemperatur. Dies ermöglicht es, den Luftentfeuchter auch bei moderaten Außentemperaturen gezielt im Kaltwettermodus zu betreiben. (um z.B. Wäsche schneller zu trocknen)
 
 ---
 
@@ -38,6 +36,7 @@ Dieses Blueprint automatisiert die Steuerung eines Luftentfeuchters basierend au
 
 - **Schalter**:
   - Entfeuchter-Schalter (`switch`)
+    zum Beispiel über einen Smartplug
 
 - **Optionale Entitäten**:
   - `input_boolean.manual_cold_weather_override`: Überschreibt die Erkennung kalter Wetterbedingungen.
