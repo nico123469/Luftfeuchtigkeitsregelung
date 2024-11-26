@@ -57,7 +57,7 @@ variables:
   min_humidity_cold: "{{ states('input_number.min_humidity_cold') | float }}"
   
   #    manual_override_boolean:
-  manual_override_entity: "{{ state('input_boolean.manual_cold_weather_override') | boolean }}"
+  manual_override_entity: "{{ state('input_boolean.manual_cold_weather_override') | bool }}"
 
 
 trigger:
