@@ -51,6 +51,8 @@ Dieses Blueprint automatisiert die Steuerung eines Luftentfeuchters basierend au
 
 ### 1. Blueprint importieren
 
+[![Open your Home Assistant instance and show the blueprint import dialog with a specific blueprint pre-filled.](https://my.home-assistant.io/badges/blueprint_import.svg)](https://my.home-assistant.io/redirect/blueprint_import/?blueprint_url=https%3A%2F%2Fgithub.com%2Fnico123469%2FLuftfeuchtigkeitsregelung%2Fraw%2Frefs%2Fheads%2Fmain%2FLuftentfeuchter_Automatisierung.yaml)
+
    #### 1. **Klicke auf die folgenden Links**, um die Blueprints direkt zu importieren:
    - [Blueprint: Luftentfeuchter Automatisierung](https://github.com/nico123469/Luftfeuchtigkeitsregelung/raw/refs/heads/main/Luftentfeuchter_Automatisierung.yaml)
 
