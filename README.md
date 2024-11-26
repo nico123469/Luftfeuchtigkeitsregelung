@@ -119,7 +119,7 @@ trigger:
 ## Beispiel Aufbau
 ### 1.Hardware
    - [SwitchBot](https://eu.switch-bot.com/products/switchbot-indoor-outdoor-thermo-hygrometer) Indoor/Outdoor Thermo-Hygrometer
-   - [IKEA](https://www.ikea.com/at/de/p/tretakt-steckdose-smart-80540349/) Tradfri TRETAKT
+   - [IKEA](https://www.ikea.com/at/de/p/tretakt-steckdose-smart-80540349/) Tradfri TRETAKT Smartplug
 ### 2.Aufbau
    Zwei Thermo-Hygrometer im wohnzimmer an unterschiedlichen Orten.
    Den Luftentfeuchter mit dem Smartplug angesteckt.
