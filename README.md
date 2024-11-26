@@ -2,7 +2,7 @@
 
 # Luftentfeuchter Automatisierung Blueprint
 
-Dieses Blueprint automatisiert die Steuerung eines Luftentfeuchters basierend auf Innen- und Außentemperatur sowie der relativen Luftfeuchtigkeit. Es ermöglicht eine dynamische Anpassung der Luftfeuchtigkeitsgrenzen über `input_number`-Entitäten und bietet die Möglichkeit, kaltes Wetter manuell zu überschreiben.
+Dieses Blueprint automatisiert die Steuerung eines Luftentfeuchters basierend auf Innen- und Außentemperatur sowie dem Taupunkt im Innenraum. Die Automatisierung unterscheidet zwischen warmem und kaltem Wetter (Außentemperatur höher oder niedriger als der Taupunkt innen, [Kondensationsrisiko]). Die jeweiligen Grenzen der Hysterese können dabei frei gewählt werden. Zusätzlich gibt es einen Override-Schalter, welcher die Automatisierung dauerhaft in den Kaltwettermodus schaltet.
 
 ---
 
