@@ -29,12 +29,6 @@ blueprint:
       selector:
         entity:
           domain: sensor
-#    manual_override_boolean:
-#      name: Manueller Kaltes Wetter Override
-#      description: Input Boolean, um manuell "Kaltes Wetter" zu erzwingen.
-#      selector:
-#        entity:
-#          domain: input_boolean
     dehumidifier_switch:
       name: Schalter für Luftentfeuchter
       description: Schalter zum Ein-/Ausschalten des Luftentfeuchters.
@@ -47,7 +41,6 @@ variables:
   indoor_temperature_entities: !input indoor_temperature_sensors
   outdoor_humidity_entity: !input outdoor_humidity_sensor
   outdoor_temperature_entity: !input outdoor_temperature_sensor
-  #manual_override_entity: !input manual_override_boolean
   dehumidifier_entity: !input dehumidifier_switch
 
   # Nutzung der input_number Entitäten für die Luftfeuchtigkeitsgrenzen
@@ -56,7 +49,7 @@ variables:
   max_humidity_cold: "{{ states('input_number.max_humidity_cold') | float }}"
   min_humidity_cold: "{{ states('input_number.min_humidity_cold') | float }}"
   
-  #    manual_override_boolean:
+  # manual_override_boolean:
   manual_override_entity: "{{ state('input_boolean.manual_cold_weather_override') | bool }}"
 
 
