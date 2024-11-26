@@ -123,6 +123,7 @@ trigger:
    Den Luftentfeuchter mit dem Smartplug angesteckt.
    Wetter-API für Außen-Messwerte.
 ### 3.Konfiguration
+![Screenshot der Konfiguration meiner Automatisierung.](https://github.com/nico123469/Luftfeuchtigkeitsregelung/blob/main/Screenshot01.png?raw=true)
 ```yaml
 alias: Luftentfeuchter Automatisierung
 description: ""
@@ -139,4 +140,3 @@ use_blueprint:
     outdoor_temperature_sensor: sensor.weather_home_temp
     dehumidifier_switch: switch.dehumidifier
 ```
-![Screenshot of a comment on a GitHub issue showing an image, added in the Markdown, of an Octocat smiling and raising a tentacle.](https://myoctocat.com/assets/images/base-octocat.svg)
