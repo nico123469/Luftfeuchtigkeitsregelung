@@ -57,12 +57,9 @@ Dieses Blueprint automatisiert die Steuerung eines Luftentfeuchters basierend au
 [![Open your Home Assistant instance and show the blueprint import dialog with a specific blueprint pre-filled.](https://my.home-assistant.io/badges/blueprint_import.svg)](https://my.home-assistant.io/redirect/blueprint_import/?blueprint_url=https%3A%2F%2Fgithub.com%2Fnico123469%2FLuftfeuchtigkeitsregelung%2Fraw%2Frefs%2Fheads%2Fmain%2FLuftentfeuchter_Automatisierung.yaml)
 
 ### Option 2: Direct Link
-   ##### 1. **Klicke auf die folgenden Links**, um die Blueprints direkt zu importieren:
-   - [Blueprint: Luftentfeuchter Automatisierung](https://github.com/nico123469/Luftfeuchtigkeitsregelung/raw/refs/heads/main/Luftentfeuchter_Automatisierung.yaml)
-
-   ##### 2. **Importiere den Blueprint in Home Assistant**:
+   
    - Gehe in Home Assistant zu **Einstellungen** → **Blueprints** → **Blueprint importieren**.
-   - Füge die obenstehenden Links in das **URL-Feld** ein und klicke auf **Importieren**.
+   - Füge den [Link](https://github.com/nico123469/Luftfeuchtigkeitsregelung/raw/refs/heads/main/Luftentfeuchter_Automatisierung.yaml) in das **URL-Feld** ein und klicke auf **Importieren**.
 
 
 ### 2. Entitäten konfigurieren
@@ -116,3 +113,31 @@ trigger:
 ```
 - ### Grenzwerte
     - Ändere die Werte der einzelnen `input_number`.
+
+---
+
+## Beispiel Aufbau
+### 1.Hardware
+   - [SwitchBot](https://eu.switch-bot.com/products/switchbot-indoor-outdoor-thermo-hygrometer) Indoor/Outdoor Thermo-Hygrometer
+   - [IKEA](https://www.ikea.com/at/de/p/tretakt-steckdose-smart-80540349/) Tradfri TRETAKT
+### 2.Aufbau
+   Zwei Thermo-Hygrometer im wohnzimmer an unterschiedlichen Orten.
+   Den Luftentfeuchter mit dem Smartplug angesteckt.
+   Wetter-API für Außen-Messwerte.
+### 3.Konfiguration
+```yaml
+alias: Luftentfeuchter Automatisierung
+description: ""
+use_blueprint:
+  path: github.com/Luftentfeuchter_Automatisierung.yaml
+  input:
+    indoor_humidity_sensors:
+      - sensor.switchbot_th_01_hum
+      - sensor.switchbot_th_02_hum
+    indoor_temperature_sensors:
+      - sensor.switchbot_th_01_temp
+      - sensor.switchbot_th_02_temp
+    outdoor_humidity_sensor: sensor.weather_home_hum
+    outdoor_temperature_sensor: sensor.weather_home_temp
+    dehumidifier_switch: switch.dehumidifier
+```
