@@ -31,12 +31,13 @@ Dieses Blueprint automatisiert die Steuerung eines Luftentfeuchters basierend au
 - **Sensoren**:
   - Innen-Luftfeuchtigkeitssensor(en) (`sensor`)
   - Innen-Temperatursensor(en) (`sensor`)
+    Wenn mehrere Sensoren für den Innenraum angegeben werden, wird für die Steuerung das Arythmetische mittel der Luftfeuchtigkeitsmessungen verwendet.
   - Außen-Luftfeuchtigkeitssensor (`sensor`)
   - Außen-Temperatursensor (`sensor`)
 
 - **Schalter**:
   - Entfeuchter-Schalter (`switch`)
-    zum Beispiel über einen Smartplug
+    zum Beispiel über einen Smartplug.
 
 - **Variablen**:
   - `input_boolean.manual_cold_weather_override`: Überschreibt die Erkennung kalter Wetterbedingungen.
@@ -51,12 +52,15 @@ Dieses Blueprint automatisiert die Steuerung eines Luftentfeuchters basierend au
 
 ### 1. Blueprint importieren
 
+### Option 1: My Home Assistant
+
 [![Open your Home Assistant instance and show the blueprint import dialog with a specific blueprint pre-filled.](https://my.home-assistant.io/badges/blueprint_import.svg)](https://my.home-assistant.io/redirect/blueprint_import/?blueprint_url=https%3A%2F%2Fgithub.com%2Fnico123469%2FLuftfeuchtigkeitsregelung%2Fraw%2Frefs%2Fheads%2Fmain%2FLuftentfeuchter_Automatisierung.yaml)
 
-   #### 1. **Klicke auf die folgenden Links**, um die Blueprints direkt zu importieren:
+### Option 2: Direct Link
+   ##### 1. **Klicke auf die folgenden Links**, um die Blueprints direkt zu importieren:
    - [Blueprint: Luftentfeuchter Automatisierung](https://github.com/nico123469/Luftfeuchtigkeitsregelung/raw/refs/heads/main/Luftentfeuchter_Automatisierung.yaml)
 
-   #### 2. **Importiere den Blueprint in Home Assistant**:
+   ##### 2. **Importiere den Blueprint in Home Assistant**:
    - Gehe in Home Assistant zu **Einstellungen** → **Blueprints** → **Blueprint importieren**.
    - Füge die obenstehenden Links in das **URL-Feld** ein und klicke auf **Importieren**.
 
@@ -101,8 +105,6 @@ input_number:
     step: 1
     unit_of_measurement: '%'
 ```
-### 3. Blueprint konfigurieren
-  - Wähle beim Hinzufügen der Automatisierung die passenden Entitäten für deine Sensoren und Schalter aus.
 ---
 ## Anpassung
   - ### Zeitintervall
@@ -111,3 +113,6 @@ input_number:
 trigger:
   - platform: time_pattern
     minutes: "/5"  # Alle 5 Minuten
+```
+- ### Grenzwerte
+    - Ändere die Werte der einzelnen `input_number`.
