@@ -1,1 +1,6 @@
-
+- Bit um fest zu stellen ob die automatisierung im Kalt- oder Warmwetter-Modus ist.
+- Variable für verwendete hum innen
+- Variable für verwendete hum außen
+- Variable für min TP
+- Variable für verwendete temp außen
+- input fenstersensoren für autoabschaltung
