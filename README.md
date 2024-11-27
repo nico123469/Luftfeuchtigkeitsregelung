@@ -119,7 +119,7 @@ trigger:
    - [SwitchBot](https://eu.switch-bot.com/products/switchbot-indoor-outdoor-thermo-hygrometer) Indoor/Outdoor Thermo-Hygrometer
    - [IKEA](https://www.ikea.com/at/de/p/tretakt-steckdose-smart-80540349/) Tradfri TRETAKT Smartplug
 ### 2.Aufbau
-  - Zwei Thermo-Hygrometer im wohnzimmer an unterschiedlichen Orten.
+  - Zwei Thermo-Hygrometer im Wohnzimmer an unterschiedlichen Orten.
   - Den Luftentfeuchter mit dem Smartplug angesteckt.
   - Wetter-API für Außen-Messwerte.
 ### 3.Konfiguration
