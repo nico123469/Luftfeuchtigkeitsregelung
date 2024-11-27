@@ -140,8 +140,10 @@ use_blueprint:
     outdoor_temperature_sensor: sensor.weather_home_temp
     dehumidifier_switch: switch.dehumidifier
 ```
-#ToDo:
 ---
+
+# ToDo:
+
 
 - Bit um fest zu stellen ob die automatisierung im Kalt- oder Warmwetter-Modus ist.
 - Variable für verwendete hum innen
