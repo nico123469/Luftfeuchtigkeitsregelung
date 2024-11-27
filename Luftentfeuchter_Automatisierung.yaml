@@ -56,7 +56,7 @@ variables:
 trigger:
   - platform: time_pattern
     # Dieser Trigger wird alle 5 Minuten ausgeführt
-    minutes: "/5"
+    minutes: /5
 
 action:
   - variables:
