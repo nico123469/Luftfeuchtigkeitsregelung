@@ -1,0 +1,20 @@
+alias: test
+description: ""
+use_blueprint:
+  path: 
+  input:
+    indoor_humidity_sensors:
+      - sensor.switchbot_th_d_02_luftfeuchtigkeit
+      - sensor.kitchen_esp_kitchen_humidity
+    indoor_temperature_sensors:
+      - sensor.switchbot_th_d_02
+      - sensor.kitchen_esp_kitchen_temperature
+    outdoor_humidity_sensors:
+      - sensor.switchbot_th_01_luftfeuchtigkeit
+    outdoor_temperature_sensors:
+      - sensor.switchbot_th_01
+    dehumidifier_switch: switch.gang
+    window_sensors:
+      - binary_sensor.ikea_parasoll_01_offnung
+      - binary_sensor.ikea_parasoll_02_offnung_3
+      - binary_sensor.ikea_parasoll_04_offnung
