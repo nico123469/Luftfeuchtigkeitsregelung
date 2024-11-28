@@ -150,5 +150,6 @@ use_blueprint:
 - ⭕ Variable für verwendete hum außen
 - ⭕ Variable für min TP
 - ⭕ Variable für verwendete temp außen
-- ⭕ input fenstersensoren für autoabschaltung
+- ✔️ input fenstersensoren für autoabschaltung (Doku. fehlt)
+- ✔️ mehrere aussensensoren möglich (Doku. fehlt)
 
