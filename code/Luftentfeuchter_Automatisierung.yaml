@@ -1,5 +1,5 @@
 blueprint:
-  name: test1234
+  name: Blueprint: Luftentfeuchter Automatisierung
   description: Automatisierung zur Steuerung eines Luftentfeuchters basierend auf Innen- und Außentemperatur sowie Luftfeuchtigkeit.
   domain: automation
   input:
