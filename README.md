@@ -145,7 +145,7 @@ use_blueprint:
 # ToDo✔️:
 
 
-- ⭕ Bit um fest zu stellen ob die automatisierung im Kalt- oder Warmwetter-Modus ist.
+- ✔️ Bit um fest zu stellen ob die automatisierung im Kalt- oder Warmwetter-Modus ist. (Doku. fehlt)
 - ⭕ Variable für verwendete hum innen
 - ⭕ Variable für verwendete hum außen
 - ⭕ Variable für min TP
