@@ -73,17 +73,17 @@ action:
         {{ expand(window_entities) | selectattr('state', 'eq', 'on') | list | length > 0 }}
 
       # Berechnung des höchsten Taupunkts der Innenwerte
+      ## Hierfür musste namespace verwendet werden, da in einer Schleife eine liste nicht verändert werden kann. Glaub mir, hat lang gedauert.
       taupunkte: >
-        {% set taupunkte = [] %}
+        {% set temp = namespace(taupunkte=[]) %}
         {% for i in range(indoor_humidity_entities | count) %}
           {% set humidity = states(indoor_humidity_entities[i]) | float %}
           {% set temperature = states(indoor_temperature_entities[i]) | float %}
-          {% set taupunkt = (243.12 * ((log(humidity / 100)) + ((17.62 * temperature) / (243.12 + temperature)))) /
-                            (17.62 - ((log(humidity / 100)) + ((17.62 * temperature) / (243.12 + temperature)))) %}
-          {% set taupunkte = taupunkte + [taupunkt] %}
+          {% set taupunkt = (243.12 * ((log(humidity / 100)) + ((17.62 * temperature) / (243.12 + temperature)))) / (17.62 - ((log(humidity / 100)) + ((17.62 * temperature) / (243.12 + temperature))))%}
+          {% set temp.taupunkte = temp.taupunkte + [taupunkt] %}
         {% endfor %}
-        {{ taupunkte }}
-
+        {{ temp.taupunkte }} 
+        
       mittlere_luftfeuchtigkeit: >
         {% set feuchtigkeiten = indoor_humidity_entities | map('states') | map('float') | list %}
         {{ feuchtigkeiten | sum / feuchtigkeiten | length }}
@@ -92,7 +92,13 @@ action:
         {% set temperaturen = indoor_temperature_entities | map('states') | map('float') | list %}
         {{ temperaturen | sum / temperaturen | length }}
 
-      hoechster_taupunkt: "{{ taupunkte | max }}"
+      hoechster_taupunkt: >
+        {% if taupunkte | length > 0 %}
+          {{ taupunkte | max }}
+        {% else %}
+          100
+        {% endif %}
+#      hoechster_taupunkt: "{{ taupunkte | max }}"
 
       # Berechnung der mittleren Außentemperatur
       mittlere_aussen_temperatur: >
@@ -113,6 +119,18 @@ action:
         
       max_humidity: "{{ max_humidity_cold if ist_kaltes_wetter else max_humidity_warm }}"
       min_humidity: "{{ min_humidity_cold if ist_kaltes_wetter else min_humidity_warm }}"
+
+  # Hier wird der Modus (Warm- oder Kaltmodus) gespeichert
+  - service: input_select.select_option
+    target:
+      entity_id: input_select.last_run_mode
+    data:
+      option: >
+        {% if ist_kaltes_wetter %}
+          Kaltmodus
+        {% else %}
+          Warmmodus
+        {% endif %}
 
   - if:
       - condition: template
